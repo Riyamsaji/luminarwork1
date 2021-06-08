@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>REGISTER HERE</h1>
+    <!--containner tag which means it contains number of tags-->
+    <form>
+        <!--we use fieldset tag to give an outline to the form-->
+        <fieldset>
+        <!--not editable text so use label tag-->
+        <legend>Registration Form</legend>
+        <label for="fname">FIRST NAME </label>
+        <input type="text" id="fname"><br>
+
+        <label for="lname">LAST NAME</label>
+        <input type="text" id="lname"><br>
+
+        <label for="em">email</label>
+        <input type="email" name="" id="em"><br>
+
+        <label for="addr">ADDRESS</label>
+        <textarea name="" id="addr"rows="10" cols="30"></textarea><br>
+
+        <label for="course">Select course</label>
+        <select name="" id="course">
+            <option value="">MEAN STACK</option>
+            <option value ="">Django</option>
+            <option value ="">software testing</option>
+            <option value="">big data</option>
+        </select><br>
+
+        <label for="">Gender :</label>
+        <input type="radio" name="gender" id="">
+        <label for="">Male</label>
+        <input type="radio" name ="gender" id="">
+        <label for="">Female</label>
+        <input type="radio" name="gender" id="">
+        <label for="">others</label>
+        <br>
+        <label for="">Mark your skills :</label>
+        <input type="checkbox"><label for="">Html</label>
+        <input type="checkbox"><label for="">css</label>
+        <input type="checkbox"><label for ="">javascript</label>
+       <br>
+        <input type="submit" value="CREATE ACCOUNT">
+        </fieldset>
+    </form>
+</body>
+
+</html>
