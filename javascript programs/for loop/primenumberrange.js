@@ -7,7 +7,7 @@ for (let i = low; i <= upper; i++) {//i=21,22,23
     for (let j = 2; j < i; j++) {//j=2,3,2,2
         if (i % j == 0) {//21%2,21%3,22%2,23%2
             flag += 1;//1,1
-            break;
+            
         }
     }
 if (flag == 0) {

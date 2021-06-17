@@ -1,13 +1,14 @@
-var num=23;
-var flag=0;//check numbers between 2 to 22 then it is divisible means it is not prime num
-for(let i=2;i<num;i++){
-    if(num%i==0){
-        flag+=1;
+var num = 23;
+var flag = 0;
+for (let i = 2; i < num; i++) {//2.....22,()
+    if (num % i == 0) {//23%2!=0,23%3!=0,23%4!=0..........
+        flag += 1;
+       break;
     }
 }
 if(flag==0){
-    console.log("it is a primenumber");
+  console.log("prime number");
 }
 else{
-    console.log("it is not prime");
+    console.log(" not a prime number");
 }
