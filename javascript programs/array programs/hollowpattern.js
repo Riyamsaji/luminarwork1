@@ -1,17 +1,12 @@
 for(let row=1;row<=5;row++){
-   let str="";
-
-
-for(let space=5-row;space>=1;space--){
-    str+="";
-}
-for(let star=1;star<=row & star<=col;star++){
-  
-if(row+col==6 || col-row==4){
-        str+="* ";
+    let str="";
+    for(let col=1;col<=9;col++){
+        if((row==5 )||(row+col==6 )|| (col-row==4)){
+            str+="*";
+        }
+        else{
+            str+=" ";
+        }
     }
-}
-
-console.log(str);
-
+    console.log(str);
 }
