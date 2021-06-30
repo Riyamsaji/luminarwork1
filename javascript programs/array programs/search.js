@@ -5,6 +5,7 @@ var flag=0;
 for(var i=0;i<arr.length;i++){
     if(arr[i]==search){
         flag++;
+        break;
     }
 }
 if(flag==1){
