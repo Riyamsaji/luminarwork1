@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOOK</title>
+    <!-- LINKING CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body style="background-color: #C0C0C0;">
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <input type="text" id="bk_name" placeholder="bookname" class="form-control"><br>
+                <input type="text" id="author" placeholder="author" class="form-control"><br>
+               
+                <input type="text" id="price" placeholder="price" class="form-control"> <br>
+                <input type="text" id="copies" placeholder="copies" class="form-control"><br>
+                <button class="btn btn-warning" style="margin-top: 20px;" onclick="createBook()">CREATE BOOK</button>
+                <button class="btn btn-success" style="margin-top: 20px;" onclick="fetchAllBooks()">LIST ALL
+                    BOOKS</button>
+            </div>
+            <div class="col-4"></div>
+        <!-- </div>
+        <div class="row mt-4">
+            <div class="col-4"></div>
+            <div class="col-4">
+
+            </div>
+            <div class="col-4"></div>
+        </div>
+
+        <div> -->
+            <table class="table">
+                <tr>
+                    <td>BOOK NAME </td>
+                    <td>AUTHOR </td>
+                    <td>PRICE </td>
+                    <td>QUANTITY </td>
+                </tr>
+                <tbody id="result"></tbody>
+            </table>
+        
+        <!-- //TO search FOR A BOOK -->
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <input type="text" id="search" placeholder="enter a book name">
+                <button class="btn btn-success" onclick="findBook()">FIND</button>
+            </div>
+            <div class="col-4"></div>
+
+        </div>
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4" id="resultarea">
+
+
+            </div>
+            <div class="col-4"></div>
+
+        </div>
+    </div>
+</body>
+<script>
+    //FUNCTION  TO FIND PARICULAR BOOK
+    function findBook() {
+        let bname = search.value;
+        if (bname in localStorage) {
+
+            let book = JSON.parse(localStorage.getItem(bname));
+
+            console.log(book.book_name);
+            let html_data = `<div class="card" style="width: 18rem;">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">${book.book_name}</li>
+    <li class="list-group-item">${book.author_name}</li>
+    <li class="list-group-item">${book.amount}</li>
+    <li class="list-group-item">${book.qty}</li>
+  </ul>
+  </div>
+</div>`
+            resultarea.innerHTML += html_data;
+
+        }
+        else {
+            alert("book don't exist")
+        }
+    }
+
+    function populate(books) {//to diplay the bookarray in htmlpage
+        let html_data = "";
+        for (let book of books) {
+            html_data += `<tr><td>${book.book_name}</td><td>${book.author_name}</td><td>${book.amount}</td><td>${book.qty}</td></tr>`
+            //to display as table cells
+        }
+
+
+        result.innerHTML = html_data;
+
+    }
+    function createBook() {
+        let book_name = document.querySelector("#bk_name").value;
+        let author_name = document.querySelector("#author").value;
+        let amount = document.querySelector("#price").value;
+        let qty = document.querySelector("#copies").value;
+        //converting to object
+
+        let book = {
+            book_name: book_name, //dont take id of the input and variable same
+            author_name: author_name,
+            amount: amount,
+            qty: qty
+        }
+        console.log(book);
+        //if key and value are same then we can do like
+        //   let book={
+        //       book_name,author_name,amount,qty
+        //   }
+
+
+
+        // //we should store in localstorage book
+        //*checking whether if already bookname is present alert already exist else store on localstorage.
+        if (book_name in localStorage) {
+            alert("already exist")
+        } else {
+            localStorage.setItem(book.book_name, JSON.stringify(book))
+            alert("book created succesfully")
+            window.location.reload(true);
+        }
+        //another way
+        // if(localStorage.getItem(book_name)==null){
+        //     localStorage.setItem(book.book_name, JSON.stringify(book))
+        //     alert("book created succesfully")
+        //      window.location.reload(true);
+        // }
+        // else{
+        //     alert("already exist")
+        // }
+    }
+ 
+    //*FETCH ALL BOOKS
+    function fetchAllBooks() {
+        let books = [];//book array
+        for (let i = 0; i < localStorage.length; i++) {
+            
+            var book = JSON.parse(localStorage.getItem(localStorage.key(i)));//convert into object and geting the value of keys
+            //   console.log(book.book_name);
+            books.push(book)
+
+        }
+        console.log(books);
+        populate(books)
+    }
+</script>
+
+</html>

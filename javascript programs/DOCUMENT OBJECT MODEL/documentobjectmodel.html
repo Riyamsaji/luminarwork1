@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Document Object Model</h1>
+    <h2 id="hto">Document Object model methods</h2>
+    <h2>methods</h2>
+    <ul>
+        <li>getElementsByTagName()</li>
+        <li>getElementById()</li>
+        <li>getElementsByClassName</li>
+        <li>querySelectorAll()</li>
+    </ul>
+    <ul>
+        <li class="method3">One</li>
+        <li class="method3">Two</li>
+        <li class="method3">Three</li>
+    </ul>
+    <ul>
+        <li id="method2">One</li>
+        <li>One</li>
+        <li>Two</li>
+    </ul>
+</body>
+<script>
+    //method1=getElementsByTagName()=>compulsorily we need to put for loop to get the elements.
+    //so the properties will be applied to all the tags having the same name.
+    var hone = document.getElementsByTagName("h1")
+    for (let tag of hone) {
+        tag.style.color = "green"
+    }
+
+    //another eg:giving yellow color to the li tag
+    var litags = document.getElementsByTagName("li")
+    for (let tag of litags) {
+        tag.style.color = "yellow"
+    }
+
+    //method2
+    //getElementsById()
+    //we can apply a property to a particular element.
+    //no need of forloop
+    //code
+    // var htwo=document.getElementById("hto");
+    // hto.style.color="cyan"
+    //another way to do this
+    //ther will be only one id with same name so
+    hto.style.color = "purple"
+
+    //method3
+    //getElementsByClassName
+    //giving properties by classname
+    //when there are multiple values we need for loop
+    //for loop needed
+    var method3 = document.getElementsByClassName("method3");
+    for (let tag of method3) {
+        tag.style.color = "pink"
+    }
+
+    //METHOD4
+    //querySelectorAll()
+    //needed for loop
+    //IT WILL RETURN ALL THE OCCURENCES.
+    // for className=>.
+    // for id=>#
+    // for tagName=>tagName
+    //method4 for classname
+    var method1 = document.querySelectorAll(".method3")
+    for (let tag of method1) {
+        tag.style.color = "black"
+    }
+
+    //method4 for id
+    var method2 = document.querySelectorAll("#method2");
+    for (let tag of method2) {
+        tag.style.color = "grey"
+    }
+    //method4 for tagname
+    var method3 = document.querySelectorAll("h2")
+    for (let tag of method3) {
+        tag.style.color = "red"
+    }
+
+    //textcontent
+    var htwo = document.querySelector("h2");//querySelector() will select occurence of first element.
+    htwo.textContent = "Document Object model methods";//textcontent will help to change the text inside a tag
+   //when i need to change the text style to italics we use <em> tag
+   // htwo.textContent = "<em>Document Object model methods</em>";=>THIS IS WRONG->O/P IS <em>Document Object model methods</em>
+  
+   //so to change textstyle to italics-innerHTML
+   htwo.innerHTML="<em>Document Object model methods</em>"
+
+</script>
+
+</html>

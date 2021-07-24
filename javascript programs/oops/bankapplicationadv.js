@@ -1,18 +1,22 @@
 class Bank {
-    getAccountDetails() {
-        let accounts = {
-            1000: { account_number: 1000, name: "ajay", balance: 1000, username: 1000, password: "userone" },
-            1001: { account_number: 1001, name: "vjay", balance: 2000, username: 1001, password: "usertwo" },
-            1002: { account_number: 1002, name: "ram", balance: 3000, username: 1002, password: "userthree" },
-            1003: { account_number: 1003, name: "ravi", balance: 4000, username: 1003, password: "userfour" }
-        }
-        return accounts
+    status = 0;//instance variable
+    accounts = {
+        1000: { account_number: 1000, name: "ajay", balance: 1000, username: 1000, password: "userone" },
+        1001: { account_number: 1001, name: "vjay", balance: 2000, username: 1001, password: "usertwo" },
+        1002: { account_number: 1002, name: "ram", balance: 3000, username: 1002, password: "userthree" },
+        1003: { account_number: 1003, name: "ravi", balance: 4000, username: 1003, password: "userfour" }
     }
-    authenticate(username, password) {
-        let accountDetails = this.getAccountDetails();
+    getAccountDetails() {
+
+        return this.accounts
+    }
+    authenticate(username, password) {//login
+        let accountDetails = this.accounts
         if (username in accountDetails) {
             if (password == accountDetails[username]["password"]) {
-                return 1;
+                this.status = 1;
+                return username
+
             }
             else {
                 return -1;
@@ -22,29 +26,55 @@ class Bank {
             console.log("login failed");
         }
     }
-    createAccount(account_number, name, balance) {
-        this.account_number = this.account_number;
-        this.name = name;
-        this.balance = balance
-    }
-        deposit(amt){
-            this.balance += amt;
-            console.log(`your account number ${this.account_number} is credited with ${amt}.your available balance is ${this.balance}`);
+    balanceEnquiry(account_number) {
+        if (this.status == 1) {
+            return this.accounts[account_number]["balance"]
         }
-        withdrawal(amt){
-            if (this.balance < amt) {
-                console.log("transaction failed");
+        
+            return "invalid session"
+        
+    }
+    //fundtransfer
+    fundTransfer(from_accnt, to_accnt, amount) {
+        if (this.status == 1) {//check it is logged in or not
+            let balanc = this.balanceEnquiry(from_accnt);
+          
+            if (balanc >= amount) {//check the fromaccount have required balance
+
+                if (to_accnt in this.accounts) {
+                    this.accounts[from_accnt]["balance"] -= amount;
+                    this.accounts[to_accnt]["balance"] += amount
+                  
+                }
+                else {
+                    console.log("invalid toaccnt");
+                }
+
             }
             else {
-                this.balance -= amt;
-                console.log(`your account number ${this.account_number} is debited with ${amt}.your available balance is ${this.balance}`);
+                console.log("insuficent balance");
             }
+
         }
-        balanceEnquiry(){
-            console.log(`your available balance is ${this.balance}`);
+        else {
+            console.log("invalid session");
         }
     }
+
+
+//logout
+
+logout(user){
+    this.status=0
+}
+}
+
 var obj1 = new Bank();
-var user=obj1.authenticate(1000,"test");
-var res=user==0?"invalid user":user==-1?"invalid password":"success"
-console.log(res);
+var user = obj1.authenticate(1000, "userone")
+//var res = user == 0 ? invaliduser : user == -1 ? "invalid pwd" : "success"
+
+obj1.fundTransfer(user, 1002, 200);
+console.log(obj1.balanceEnquiry(user));
+obj1.logout();
+
+
